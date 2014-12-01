@@ -1,5 +1,5 @@
 {
-  "name": "webapp-scaffold",
+  "name": "NerdHat",
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
     "grunt": "^0.4.5",
@@ -25,12 +25,10 @@
     "load-grunt-tasks": "^0.4.0",
     "time-grunt": "^0.4.0",
     "grunt-bower-requirejs": "~0.7.0",
-    "grunt-contrib-requirejs": "~0.4.0"
+    "grunt-contrib-requirejs": "~0.4.0",
+    "grunt-wiredep": "~2.0.0"
   },
   "engines": {
     "node": ">=0.10.0"
-  },
-  "dependencies": {
-    "grunt-wiredep": "~2.0.0"
   }
 }
