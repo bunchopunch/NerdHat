@@ -152,9 +152,9 @@ module.exports = function (grunt) {
           logLevel: 2,
           almond: true,
           name: '../../bower_components/almond/almond',
-          baseUrl: "<%= config.appLocation %>/scripts",
-          optimize: "uglify",
-          include: ["main"],
+          baseUrl: '<%= config.appLocation %>/scripts',
+          optimize: 'uglify',
+          include: ['main'],
           out: "<%= config.distLocation %>/scripts/main.js",
           wrap: true,
           mainConfigFile: '<%= config.appLocation %>/require-config.js'
@@ -317,9 +317,9 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-     concat: {
-       dist: {}
-     },             // Need to move back to usemin blocks
+    concat: {
+      dist: {}
+    },             // Need to move back to usemin blocks
 
     // Copies remaining files to places other tasks can use
     copy: {
