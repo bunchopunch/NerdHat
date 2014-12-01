@@ -9,7 +9,7 @@ require.config({
       'modernizr': '../../bower_components/modernizr/modernizr',
       'backbone': '../../bower_components/backbone/backbone',
       'underscore': '../../bower_components/underscore/underscore',
-      'marionette': '../../bower_components/marionette/src/backbone.marionette',
+      'marionette': '../../bower_components/marionette/lib/backbone.marionette',
       'foundation': '../../bower_components/foundation/js/foundation',
       'text': '../../bower_components/text/text',
       'vendor': '../../vendor_components'
@@ -27,8 +27,8 @@ require.config({
        exports: 'Backbone'
      },
      marionette: {
-       deps: ['backbone']
-       exports: 'Backbone.Marionette',
+       deps: ['backbone'],
+       exports: 'Backbone.Marionette'
      },
      foundation: {
        deps: [

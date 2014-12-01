@@ -10,12 +10,14 @@ define([
   console.log('Application was loaded')
 
   var initialize = function(){
-
-    $(document).foundation();	// Start Foundation
+  	// Start Foundation
+    $(document).foundation();
+    // Set up a Marionette Application
     var App = new Backbone.Marionette.Application();
 
-  }
 
+
+  }
 
   return {
     initialize: initialize
