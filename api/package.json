@@ -1,0 +1,11 @@
+{
+  "name": "NerdHatAPI",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "body-parser": "~1.0.1"
+  }
+}

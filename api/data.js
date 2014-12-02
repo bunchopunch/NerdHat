@@ -1,0 +1,39 @@
+// APPLICATION DATA / MOCK ------------------------------------------------------------------- 
+
+var hats = [
+  {
+    name: 'Fancy Fedora',
+    description: 'No, Not the operating system! This hat is a nerds cream dream!',
+    features: [
+      'Tippable',
+      'Exists outside the Friendzone Continuum',
+      'M\'lady!'
+    ],
+    price: '109.56',
+    image: 'fedora.jpg'
+  },
+  {
+    name: 'Houndstooth Trilby',
+    description: 'Trilby? More like tribute. The sleek look and feel of this houndstooth stands for everything modern fashion has to offer!',
+    features: [
+      'The sleek feel of houndstooth',
+      'One size fits almost most',
+      'Also available at Target'
+    ],
+    price: '49.56',
+    image: 'tribly.jpg'
+  },
+  {
+    name: 'Twiddle Me Not Top Hat',
+    description: 'The top hat and monicle are no longer just for the high and mighty (yet lovable) hackers of LulzSec, drinking wine in their ivory towers. Don this headgear and become enlightened.',
+    features: [
+      'Black: for stealth',
+      '1337 HaX0r skillz',
+      'Monicle not included'
+    ],
+    price: '159.56',
+    image: 'tophat.jpg'
+  }
+];
+
+module.exports = hats;
