@@ -35,3 +35,9 @@ At this point, the API app is sloppy and simple. But, it should still work. Plea
 - `curl -X POST -i -H "Content-Type: application/json" -d '{"name":"Mountain Man","description":"So burly","features": ["Nope."],"price":"68.56","image":"unknown.jpg"}' http://localhost:9090/api/hats`
 - `curl -X DELETE -i -H "Content-Type: application/json" http://localhost:9090/api/hats/1`
 - `curl -X PUT -i -H "Content-Type: application/json" -d '{"name":"Mountain Man","description":"So burly","features": ["Nope."],"price":"68.56","image":"unknown.jpg"}' http://localhost:9090/api/hats/1`
+
+##Image Credits
+- http://commons.wikimedia.org/wiki/Category:Houndstooth#mediaviewer/File:Houndstooth.jpg
+- http://commons.wikimedia.org/wiki/Category:Trilby#mediaviewer/File:FrankMillerSanDiego_crop.jpg
+- http://www.freeimages.com/photo/1395333
+- http://www.freeimages.com/photo/1110313
