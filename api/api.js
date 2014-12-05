@@ -80,8 +80,8 @@ app.post('/api/hats', function(req, res) {
   } else {
     res.status(400);
     var errorResponse = {
-      'type': 'api_error',
-      'message': 'The new object appears to be missing keys.'
+      'code': 'api_error',
+      'detail': 'The new object appears to be missing keys.'
     };
     res.json(errorResponse);
   }
@@ -91,6 +91,8 @@ app.post('/api/hats', function(req, res) {
 // Ideally, we would have something for creating multiple rescources. 
 
 // ...And something here for a PUT with comma seperated IDs.
+
+// ...And, further still, something allowing for comma seperated DELETEs.
 
 // SINGLE HAT
 // ==================
@@ -117,17 +119,16 @@ app.put('/api/hats/:id', function(req, res) {
 //    res.status(204);
 //    res.send();
 //    Normally we would send that 204. However, Backbone needs the resource.
-//    
+//    Therefore, we'll keep it similar to the GET.
 
-    res.status(200);
     res.send({'hats': data[selectedHat]});
 
     console.log('Returning: ' + data[req.params.id]);
   } else {
     res.status(400);
     var errorResponse = {
-      'type': 'api_error',
-      'message': 'The updated object appears to be incomplete.'
+      'code': 'api_error',
+      'detail': 'The updated object appears to be incomplete.' // Probably doens't actually need to be.
     };
     res.send(errorResponse);
   }
@@ -136,8 +137,8 @@ app.put('/api/hats/:id', function(req, res) {
 app.delete('/api/hats/:id', function(req, res) {
   console.log('Deleting: ' + data[req.params.id]);
   data.splice(req.params.id, 1);
-  res.status(202);
-  res.send('Hat deleted');
+  res.status(204);
+  res.send();
 });
 
 // HELPERS
