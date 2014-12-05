@@ -12,12 +12,16 @@ highId         = 2;
 
 var Hat = function(){
   this.id = (highId + 1).toString();
+  this.herf = '/api/hats/' + (highId + 1);
+  // href is optional for single resources. But, it's there anyway.
+  // It should be retured during POSTs.
+  // Another option when returning collections is to
+  // adding a URL template at the top of the collection.
   this.name = 'An as of Yet Unnamed Hat';
   this.description = 'A dark horse rises up.';
   this.features = ['Nothing!'];
   this.price = '0.00';
   this.image = 'unknown.jpg';
-  this.herf = '/api/hats/' + (highId + 1); // Probably optional for single items 
 };
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -55,6 +59,8 @@ app.get('/api/hats', function(req, res) {
   console.log('Returning: ' + data);
 });
 
+// Ideally, we would have something for comma seperate GETs here. 
+
 app.post('/api/hats', function(req, res) {
 
   if (Object.keys(req.body).length >= 5){
@@ -70,13 +76,15 @@ app.post('/api/hats', function(req, res) {
     console.log('Created: ' + hat);
 
     res.status(201);
-    res.json({ created: data[data.length - 1] });
+    res.json({ 'hats': data[data.length - 1] });
   } else {
     res.status(400);
     res.send('The new object appears to be missing keys.');
   }
 
 });
+
+// Ideally, we would have something for creating multiple rescources. 
 
 // SINGLE HAT
 // ==================
@@ -90,23 +98,14 @@ app.put('/api/hats/:id', function(req, res) {
   selectedHat = searchHats(req.params.id);
 
   // Technically, this means that a put missing an attribute will pass.
-  // That's because the test curl commands lack an ID at the moment.
+  // That's because the test curl commands lack real ID info at the moment.
   if (Object.keys(req.body).length >= 5){ 
 
-//    var hat = new Hat();
-//    data[selectedHat].id = data[selecteddata[selectedHat]].id;
     data[selectedHat].name = req.body.name;
     data[selectedHat].description = req.body.description;
     data[selectedHat].features = req.body.features;
     data[selectedHat].price = req.body.price;
     data[selectedHat].image = req.body.image;
-
-//    var hat = new Hat();
-//    hat.name = req.body.name;
-//    hat.description = req.body.description;
-//    hat.features = req.body.features;
-//    hat.price = req.body.price;
-//    hat.image = req.body.image;
 
     res.json({ updated: data[selectedHat] });
     console.log('Returning: ' + data[req.params.id]);
