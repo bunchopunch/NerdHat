@@ -28,13 +28,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var port = process.env.PORT || 9090;        // set our port
+var port = process.env.PORT || 9090;        // Set our port.
 
 // all environments
 app.set('port', process.env.PORT || port);
 app.set("jsonp callback", true);
 app.enable('jsonp callback');
-// app.set('jsonp callback name', 'cb');
+// app.set('jsonp callback name', 'cb'); // Disabled this for the moment.
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -79,12 +79,18 @@ app.post('/api/hats', function(req, res) {
     res.json({ 'hats': data[data.length - 1] });
   } else {
     res.status(400);
-    res.send('The new object appears to be missing keys.');
+    var errorResponse = {
+      'type': 'api_error',
+      'message': 'The new object appears to be missing keys.'
+    };
+    res.json(errorResponse);
   }
 
 });
 
 // Ideally, we would have something for creating multiple rescources. 
+
+// ...And something here for a PUT with comma seperated IDs.
 
 // SINGLE HAT
 // ==================
@@ -111,7 +117,11 @@ app.put('/api/hats/:id', function(req, res) {
     console.log('Returning: ' + data[req.params.id]);
   } else {
     res.status(400);
-    res.send('The updated object appears to be incomplete.');
+    var errorResponse = {
+      'type': 'api_error',
+      'message': 'The updated object appears to be incomplete.'
+    };
+    res.send(errorResponse);
   }
 });
 
