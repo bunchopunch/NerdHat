@@ -11,7 +11,8 @@ var hats = [
       'M\'lady!'
     ],
     price: '109.56',
-    image: 'fedora.jpg'
+    image: 'fedora.jpg',
+    href: '/api/hats/0'
   },
   {
     id: '1',
@@ -23,7 +24,8 @@ var hats = [
       'Also available at Target'
     ],
     price: '49.56',
-    image: 'tribly.jpg'
+    image: 'tribly.jpg',
+    href: '/api/hats/1'
   },
   {
     id: '2',
@@ -35,7 +37,8 @@ var hats = [
       'Monicle not included'
     ],
     price: '159.56',
-    image: 'tophat.jpg'
+    image: 'tophat.jpg',
+    href: '/api/hats/2'
   }
 ];
 

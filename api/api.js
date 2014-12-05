@@ -17,6 +17,7 @@ var Hat = function(){
   this.features = ['Nothing!'];
   this.price = '0.00';
   this.image = 'unknown.jpg';
+  this.herf = '/api/hats/' + (highId + 1); // Probably optional for single items 
 };
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -81,7 +82,7 @@ app.post('/api/hats', function(req, res) {
 // ==================
 app.get('/api/hats/:id', function(req, res) {
   selectedHat = searchHats(req.params.id);
-  res.json({ hat: data[selectedHat] });
+  res.json({ hats: data[selectedHat] });
   console.log('Returning: ' + data[selectedHat]);
 });
 
