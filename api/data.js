@@ -2,6 +2,7 @@
 
 var hats = [
   {
+    id: '0',
     name: 'Fancy Fedora',
     description: 'No, Not the operating system! This hat is a nerds cream dream!',
     features: [
@@ -13,6 +14,7 @@ var hats = [
     image: 'fedora.jpg'
   },
   {
+    id: '1',
     name: 'Houndstooth Trilby',
     description: 'Trilby? More like tribute. The sleek look and feel of this houndstooth stands for everything modern fashion has to offer!',
     features: [
@@ -24,6 +26,7 @@ var hats = [
     image: 'tribly.jpg'
   },
   {
+    id: '2',
     name: 'Twiddle Me Not Top Hat',
     description: 'The top hat and monicle are no longer just for the high and mighty (yet lovable) hackers of LulzSec, drinking wine in their ivory towers. Don this headgear and become enlightened.',
     features: [
