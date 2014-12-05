@@ -104,6 +104,7 @@ app.put('/api/hats/:id', function(req, res) {
   selectedHat = searchHats(req.params.id);
 
   // Technically, this means that a put missing an attribute will pass.
+  // (That would probably be more correct.)
   // That's because the test curl commands lack real ID info at the moment.
   if (Object.keys(req.body).length >= 5){ 
 
@@ -113,7 +114,14 @@ app.put('/api/hats/:id', function(req, res) {
     data[selectedHat].price = req.body.price;
     data[selectedHat].image = req.body.image;
 
-    res.json({ updated: data[selectedHat] });
+//    res.status(204);
+//    res.send();
+//    Normally we would send that 204. However, Backbone needs the resource.
+//    
+
+    res.status(200);
+    res.send({'hats': data[selectedHat]});
+
     console.log('Returning: ' + data[req.params.id]);
   } else {
     res.status(400);
