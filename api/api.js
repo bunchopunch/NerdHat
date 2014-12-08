@@ -49,13 +49,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // MAIN
 // ==================
 app.get('/api/', function(req, res) {
-  res.json({ message: 'NerdHat initiated!' });   
+  res.jsonp({ message: 'NerdHat initiated!' });   
 });
 
 // HATS
 // ==================
 app.get('/api/hats', function(req, res) {
-  res.json({ hats: data });
+  res.jsonp({ hats: data });
   console.log('Returning: ' + data);
 });
 
@@ -76,14 +76,14 @@ app.post('/api/hats', function(req, res) {
     console.log('Created: ' + hat);
 
     res.status(201);
-    res.json({ 'hats': data[data.length - 1] });
+    res.jsonp({ 'hats': data[data.length - 1] });
   } else {
     res.status(400);
     var errorResponse = {
       'code': 'api_error',
       'detail': 'The new object appears to be missing keys.'
     };
-    res.json(errorResponse);
+    res.jsonp(errorResponse);
   }
 
 });
@@ -98,7 +98,7 @@ app.post('/api/hats', function(req, res) {
 // ==================
 app.get('/api/hats/:id', function(req, res) {
   selectedHat = searchHats(req.params.id);
-  res.json({ hats: data[selectedHat] });
+  res.jsonp({ hats: data[selectedHat] });
   console.log('Returning: ' + data[selectedHat]);
 });
 
