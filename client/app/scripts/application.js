@@ -37,6 +37,10 @@ define([
 
     var hatModel = new HatModel();
 
+    var HatCollection = Backbone.Collection.extend({
+      model: hatModel
+    });
+
     hatModel.fetch();
 
     console.log(hatModel);
