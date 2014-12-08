@@ -21,8 +21,7 @@ define([
     });
 
     var HatModel = Backbone.Model.extend({
-      baseURL: 'http://localhost:9090/api/',
-      url: 'hats',
+      url: 'http://localhost:9090/api/hats',
       defaults: {
         id: '0',
         href: '/api/hats/0',
