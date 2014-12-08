@@ -24,6 +24,12 @@ var Hat = function(){
   this.image = 'unknown.jpg';
 };
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -45,6 +51,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ROUTES FOR OUR API
 // =============================================================================
 // We could be doing this to make it much more DRY.
+
+app.get('/', function(req, res, next) {
+  // Handle the get for this route
+});
+
+app.post('/', function(req, res, next) {
+ // Handle the post for this route
+});
 
 // MAIN
 // ==================

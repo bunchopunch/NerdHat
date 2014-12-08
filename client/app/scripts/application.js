@@ -21,21 +21,8 @@ define([
     });
 
     var HatModel = Backbone.Model.extend({
-      url: 'localhost:9090/api/hats',
-//      sync : function(method, collection, options) {
-//        var params = _.extend({
-//          type:         'GET',
-//          dataType:     'jsonp',
-//          url:      HatModel.url,
-//          jsonp:    "cb",   // the api requires the jsonp callback name to be this exact name
-//          processData:  false
-//        }, options);
-//
-//        return $.getJSON(params);
-//      },
-//      parse : function(response) {
-//        return response.data.results;
-//      },
+      baseURL: 'http://localhost:9090/api/',
+      url: 'hats',
       defaults: {
         id: '0',
         href: '/api/hats/0',
@@ -50,7 +37,8 @@ define([
     });
 
     var hatModel = new HatModel();
-    hatModel.fetch({dataType: 'jsonp'});
+
+    hatModel.fetch();
 
     console.log(hatModel);
   };
