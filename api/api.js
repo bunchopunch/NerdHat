@@ -34,7 +34,7 @@ var port = process.env.PORT || 9090;        // Set our port.
 app.set('port', process.env.PORT || port);
 app.set("jsonp callback", true);
 app.enable('jsonp callback');
-// app.set('jsonp callback name', 'cb'); // Disabled this for the moment.
+app.set('jsonp callback name', 'cb');
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
