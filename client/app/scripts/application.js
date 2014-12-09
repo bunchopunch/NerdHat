@@ -17,6 +17,9 @@ define([
     // Set up a Marionette Application
     var App = new Backbone.Marionette.Application();
 
+    // We will eventually require templates here, but with a dynamic culture/language code.
+    // Also.... need to not async load templates.
+
     // THE APP. STUFF THAT WILL EVENTUALLY BE BROKEN OUT TO MODULES =============================
     App.addRegions({
       primaryViewport: '#applicationHost'
@@ -36,6 +39,8 @@ define([
         App.primaryViewport.show(hatCollectionView);
       }
     });
+
+    // TODO: Add a state model
 
     // VIEWS (ALSO TO BE BROKEN OUT) ============================================================
 
@@ -61,7 +66,8 @@ define([
     });
 
     var HatView = Backbone.Marionette.ItemView.extend({
-      template: _.template(HatsViewTemp, null, {variable: 'data'}),
+      template: _.template(HatsViewSingleTemp, null, {variable: 'data'}),
+//      template: HatsViewSingleTemp,
       tagName: 'div',
       className: 'collectionItem hat-item'
     });
@@ -70,10 +76,10 @@ define([
       tagName: 'div',
       id: 'primaryPanel',
       template: _.template(HatsViewTemp, null, {variable: 'data'}),
+//      template: HatsViewTemp,
       ItemView: HatView
     });
 
-    //    hatModel.fetch();
 
     // SET UP START LISTNER =======================================================================
     App.on('start', function() {
