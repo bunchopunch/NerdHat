@@ -5,8 +5,8 @@ define([
   'modernizr',
   'foundation',
   'marionette',
-  'text!../templates/hats-collection.html',
-  'text!../templates/hats-collection-single.html'
+  'text!../templates/en-us/hats-collection.html',         // Adding IETF language tag
+  'text!../templates/en-us/hats-collection-single.html'
 ], function($, _, Backbone, Modernizr, Foundation, Marionette, HatsViewTemp, HatsViewSingleTemp){
 
   console.log('Application was loaded');
@@ -24,7 +24,9 @@ define([
 
     App.Router = Marionette.AppRouter.extend({
       appRoutes: {
-        '': 'hatCollection'
+        '': 'hatCollection',        // http://localhost:9000/#
+        'hats': 'hatCollection',    // http://localhost:9000/#/hats
+        'hats/:id': 'hatCollection' // http://localhost:9000/#/hats Not yet implemented.
       }
     });
 
@@ -83,9 +85,7 @@ define([
     });
 
     // START THE APP =============================================================================
-    $(function(){
-      App.start();
-    });
+    App.start();
 
   };
 
