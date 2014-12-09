@@ -15,33 +15,25 @@ define([
     // Set up a Marionette Application
     var App = new Backbone.Marionette.Application();
 
-    // Now lets build things ------
+    // THE APP. STUFF THAT WILL EVENTUALLY BE BROKEN OUT TO MODULES =============================
     App.addRegions({
       primaryViewport: '#applicationHost'
     });
 
     App.Router = Marionette.AppRouter.extend({
-      hatRoutes: {
-        '': 'index'
+      appRoutes: {
+        '': 'hatCollection'
       }
     });
 
-    App.Controller = new Marionette.Controller.extend({
-      index: function() {
+    App.Controller = Marionette.Controller.extend({
+      hatCollection: function() {
         var hatCollectionView = new HatCollectionView();
-        App.Region.show(hatCollectionView);
+        App.primaryViewport.show(hatCollectionView);
       }
     });
 
-    App.on('start', function() {
-      App.controller = new App.controller();
-
-      App.router = new App.Router({
-        controller: App.controller
-      });
-
-      Backbone.History.start();
-    });
+    // VIEWS (ALSO TO BE BROKEN OUT) ============================================================
 
     var HatModel = Backbone.Model.extend({
       url: 'http://localhost:9090/api/hats',
@@ -77,10 +69,18 @@ define([
       ItemView: HatView
     });
 
-    hatModel.fetch();
+    //    hatModel.fetch();
 
-    console.log(hatModel);
+    // SET UP START LISTNER =======================================================================
+    App.on('start', function() {
+      App.hatController = new App.Controller();
+      App.router = new App.Router({
+        controller: App.hatController
+      });
+      Backbone.history.start();
+    });
 
+    // START THE APP =============================================================================
     $(function(){
       App.start();
     });
