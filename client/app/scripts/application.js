@@ -4,8 +4,10 @@ define([
   'backbone',
   'modernizr',
   'foundation',
-  'marionette'
-], function($, _, Backbone, Modernizr, Foundation, Marionette){
+  'marionette',
+  'text!../templates/hats-collection.html',
+  'text!../templates/hats-collection-single.html'
+], function($, _, Backbone, Modernizr, Foundation, Marionette, HatsViewTemp, HatsViewSingleTemp){
 
   console.log('Application was loaded');
 
@@ -57,7 +59,7 @@ define([
     });
 
     var HatView = Backbone.Marionette.ItemView.extend({
-      template: '',
+      template: _.template(HatsViewTemp, null, {variable: 'data'}),
       tagName: 'div',
       className: 'collectionItem hat-item'
     });
@@ -65,7 +67,7 @@ define([
     var HatCollectionView = Backbone.Marionette.CompositeView.extend({
       tagName: 'div',
       id: 'primaryPanel',
-      template: '',
+      template: _.template(HatsViewTemp, null, {variable: 'data'}),
       ItemView: HatView
     });
 
