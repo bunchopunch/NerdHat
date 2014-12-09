@@ -17,5 +17,11 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
-  "jquery": true
+  "jquery": true,
+  "globals": {
+    "exports": true,
+    "require": true,
+    "module": true,
+    "define": true
+  }
 }
