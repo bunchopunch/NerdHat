@@ -38,9 +38,9 @@ var port = process.env.PORT || 9090;        // Set our port.
 
 // all environments
 app.set('port', process.env.PORT || port);
-app.set("jsonp callback", true);
-app.enable('jsonp callback');
-// app.set('jsonp callback name', 'cb');
+//app.set("jsonp callback", true);
+//app.enable('jsonp callback');
+// app.set('jsonp callback name', 'cb'); // Disabled JSON because of Flash exploit
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -63,13 +63,13 @@ app.post('/', function(req, res, next) {
 // MAIN
 // ==================
 app.get('/api/', function(req, res) {
-  res.jsonp({ message: 'NerdHat initiated!' });   
+  res.json({ message: 'NerdHat initiated!' });   
 });
 
 // HATS
 // ==================
 app.get('/api/hats', function(req, res) {
-  res.jsonp({ hats: data });
+  res.json({ hats: data });
   console.log('Returning: ' + data);
 });
 
@@ -90,14 +90,14 @@ app.post('/api/hats', function(req, res) {
     console.log('Created: ' + hat);
 
     res.status(201);
-    res.jsonp({ 'hats': data[data.length - 1] });
+    res.json({ 'hats': data[data.length - 1] });
   } else {
     res.status(400);
     var errorResponse = {
       'code': 'api_error',
       'detail': 'The new object appears to be missing keys.'
     };
-    res.jsonp(errorResponse);
+    res.json(errorResponse);
   }
 
 });
@@ -112,7 +112,7 @@ app.post('/api/hats', function(req, res) {
 // ==================
 app.get('/api/hats/:id', function(req, res) {
   selectedHat = searchHats(req.params.id);
-  res.jsonp({ hats: data[selectedHat] });
+  res.json({ hats: data[selectedHat] });
   console.log('Returning: ' + data[selectedHat]);
 });
 

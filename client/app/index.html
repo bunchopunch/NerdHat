@@ -53,6 +53,20 @@
             </div>
           </div>
         </div>
+
+<script type="text/template" id="collection_template">
+<h1>Browse our fine, nerdy hats: <% name %></h1>
+<section id="collectionOutput" class="hats-collection">
+</section>
+</script>
+
+<script type="text/template" id="collection_item_template">
+<h2>Name: <%= name %></h2>
+<img src="" alt="">
+<p>Price: </p>
+<p><a href="#">See More</a></p>
+</script>
+
         <!-- build:remove -->
         <script src="bower_components/requirejs/require.js"></script>
         <!-- endbuild -->

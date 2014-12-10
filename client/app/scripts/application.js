@@ -17,6 +17,9 @@ define([
     // Set up a Marionette Application
     var App = new Backbone.Marionette.Application();
 
+    // Set up basic paths.
+    App.root = 'http://localhost:9090/api/';
+
     // We will eventually require templates here, but with a dynamic culture/language code.
     // Also.... need to not async load templates.
 
@@ -36,38 +39,49 @@ define([
     App.Controller = Marionette.Controller.extend({
       hatCollection: function() {
         var hatCollectionView = new HatCollectionView();
-        App.primaryViewport.show(hatCollectionView);
+        indexHats.fetch().success(function(){ 
+          console.log(indexHats);
+          App.primaryViewport.show(hatCollectionView);
+        });
       }
     });
 
     // TODO: Add a state model
 
-    // VIEWS (ALSO TO BE BROKEN OUT) ============================================================
+//          var HatModel = Backbone.Model.extend({
+//            url: App.root + 'hats',
+//            defaults: {
+//              id: '0',
+//              href: '/api/hats/0',
+//              name: 'A Hat for a Head',
+//              description: 'What a lovely head you have. Why not add a delightfully nerdy hat?',
+//              features: [
+//                'None.... yet.'
+//              ],
+//              price: '0.00',
+//              image: 'unknown.jpg'
+//            }
+//          });
+//
+//          var hatModel = HatModel();
+//
 
-    var HatModel = Backbone.Model.extend({
-      url: 'http://localhost:9090/api/hats',
-      defaults: {
-        id: '0',
-        href: '/api/hats/0',
-        name: 'A Hat for a Head',
-        description: 'What a lovely head you have. Why not add a delightfully nerdy hat?',
-        features: [
-          'None.... yet.'
-        ],
-        price: '0.00',
-        image: 'unknown.jpg'
+    var HatCollection = Backbone.Collection.extend({
+      url: App.root + 'hats',
+      parse: function(response){ // Our models are not sored directly on the response, but inside a hats object 
+        console.log('Parsing collection');
+        return response.hats; 
       }
     });
 
-    var hatModel = new HatModel();
+    var indexHats = new HatCollection();
 
-    var HatCollection = Backbone.Collection.extend({
-      model: hatModel
-    });
+    console.log(indexHats);
+
+    // VIEWS (ALSO TO BE BROKEN OUT) ============================================================
 
     var HatView = Backbone.Marionette.ItemView.extend({
-      template: _.template(HatsViewSingleTemp, null, {variable: 'data'}),
-//      template: HatsViewSingleTemp,
+      template: '#collection_item_template', // How Marionette would normally handle templates. Ew.
       tagName: 'div',
       className: 'collectionItem hat-item'
     });
@@ -75,11 +89,11 @@ define([
     var HatCollectionView = Backbone.Marionette.CompositeView.extend({
       tagName: 'div',
       id: 'primaryPanel',
-      template: _.template(HatsViewTemp, null, {variable: 'data'}),
-//      template: HatsViewTemp,
+      model: indexHats,
+      childViewContainer: '#collectionOutput',
+      template: '#collection_template', // How Marionette would normally handle templates. Ew.
       ItemView: HatView
     });
-
 
     // SET UP START LISTNER =======================================================================
     App.on('start', function() {
