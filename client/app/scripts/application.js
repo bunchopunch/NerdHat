@@ -8,7 +8,7 @@ define([
   'text!../templates/en-us/hats-collection.html',         // Adding IETF language tag
   'text!../templates/en-us/hats-collection-single.html'
 ], function($, _, Backbone, Modernizr, Foundation, Marionette, HatsViewTemp, HatsViewSingleTemp){
-
+'use strict';
   console.log('Application was loaded');
 
   var initialize = function() {
@@ -38,7 +38,6 @@ define([
 
     App.Controller = Marionette.Controller.extend({
       hatCollection: function() {
-        var hatCollectionView = new HatCollectionView();
         indexHats.fetch().success(function(){ 
           console.log(indexHats);
           App.primaryViewport.show(hatCollectionView);
@@ -46,53 +45,44 @@ define([
       }
     });
 
-    // TODO: Add a state model
+    // TODO: Add a state model?
 
-//          var HatModel = Backbone.Model.extend({
-//            url: App.root + 'hats',
-//            defaults: {
-//              id: '0',
-//              href: '/api/hats/0',
-//              name: 'A Hat for a Head',
-//              description: 'What a lovely head you have. Why not add a delightfully nerdy hat?',
-//              features: [
-//                'None.... yet.'
-//              ],
-//              price: '0.00',
-//              image: 'unknown.jpg'
-//            }
-//          });
-//
-//          var hatModel = HatModel();
-//
+    var hatModel = Backbone.Model.extend();
 
     var HatCollection = Backbone.Collection.extend({
       url: App.root + 'hats',
-      parse: function(response){ // Our models are not sored directly on the response, but inside a hats object 
-        console.log('Parsing collection');
-        return response.hats; 
+      model: hatModel,
+      parse: function(response){  // Our models are not sored directly on the root response, 
+        return response.hats;     // but inside a hats object.
       }
     });
 
     var indexHats = new HatCollection();
 
-    console.log(indexHats);
-
     // VIEWS (ALSO TO BE BROKEN OUT) ============================================================
 
-    var HatView = Backbone.Marionette.ItemView.extend({
+//    As long as we're dropping the item view for now...
+//    var HatView = Backbone.Marionette.ItemView.extend();
+
+    var HatCompositeView = Backbone.Marionette.CompositeView.extend({
+      className: 'hat',
+      childViewContainer: '#collectionOutput',
       template: '#collection_item_template', // How Marionette would normally handle templates. Ew.
-      tagName: 'div',
-      className: 'collectionItem hat-item'
+
+//      Doesn't seem that this bit is needed:
+//      ItemView: HatView
+
+//      May want to add this once we start updating the collection:
+//        modelEvents: {
+//          'change': 'render'
+//        },
     });
 
-    var HatCollectionView = Backbone.Marionette.CompositeView.extend({
-      tagName: 'div',
-      id: 'primaryPanel',
-      model: indexHats,
-      childViewContainer: '#collectionOutput',
-      template: '#collection_template', // How Marionette would normally handle templates. Ew.
-      ItemView: HatView
+    var hatCollectionView = new HatCompositeView({
+      id: 'primaryPanel',           // If we don't add an ID and class here it will
+      className: 'hatCollection',   // get the ones from the constructor.
+      collection: indexHats,
+      template: '#collection_template'
     });
 
     // SET UP START LISTNER =======================================================================
