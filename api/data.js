@@ -25,7 +25,7 @@ var hats = [
       'Also available at Target'
     ],
     price: '49.56',
-    image: 'tribly.jpg'
+    image: 'trilby.jpg'
   },
   {
     id: '2',

@@ -65,7 +65,7 @@ define([
 //    var HatView = Backbone.Marionette.ItemView.extend();
 
     var HatCompositeView = Backbone.Marionette.CompositeView.extend({
-      className: 'hat',
+      className: 'panel clearfix hat',
       childViewContainer: '#collectionOutput',
       template: '#collection_item_template', // How Marionette would normally handle templates. Ew.
 
