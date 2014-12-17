@@ -5,10 +5,10 @@ define([
   'modernizr',
   'foundation',
   'marionette',
-  'text!../templates/en-us/hats-collection.html',         // Adding IETF language tag
-  'text!../templates/en-us/hats-collection-single.html'
+  'text!templates/en-us/hats-collection.jst',         // Adding IETF language tag
+  'text!templates/en-us/hats-collection-single.jst'
 ], function($, _, Backbone, Modernizr, Foundation, Marionette, HatsViewTemp, HatsViewSingleTemp){
-'use strict';
+  'use strict';
   console.log('Application was loaded');
 
   var initialize = function() {

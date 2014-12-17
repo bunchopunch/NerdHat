@@ -24,10 +24,12 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
+
       js: {
         files: ['<%= config.appLocation %>/scripts/**/*.js', '<%= config.appLocation %>/scripts/templates/**/*.html'],
         tasks: [ 
@@ -37,21 +39,26 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
+
       jstest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['test:watch']
       },
+
       gruntfile: {
         files: ['Gruntfile.js']
       },
+
       sass: {
         files: ['<%= config.appLocation %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['sass:server', 'autoprefixer']
       },
+
       styles: {
         files: ['<%= config.appLocation %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
+
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -84,6 +91,7 @@ module.exports = function (grunt) {
           }
         }
       },
+
       test: {
         options: {
           open: false,
@@ -165,9 +173,9 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     sass: {
       options: {
-//        sourcemap: 'auto',
+        // sourcemap: 'auto',
         loadPath: ['bower_components', 'bower_components/foundation/scss', '<%= config.appLocation %>/styles']
-        },
+      },
       dist: {
         files: [{
           expand: true,
@@ -319,7 +327,7 @@ module.exports = function (grunt) {
     // },
     concat: {
       dist: {}
-    },             // Need to move back to usemin blocks
+    }, // Need to move back to usemin blocks
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -365,8 +373,8 @@ module.exports = function (grunt) {
         'svgmin'
       ]
     }
-  });
 
+  }); // End initConfig
 
   grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function (target) {
     if (grunt.option('allow-remote')) {
@@ -378,7 +386,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-//      'wiredep',
+      // 'wiredep',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -403,14 +411,14 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-//    'wiredep',
+    // 'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'requirejs',
     'concat',
     'cssmin',
-//    'uglify',
+    // 'uglify',
     'copy:dist',
     'rev',
     'usemin',
