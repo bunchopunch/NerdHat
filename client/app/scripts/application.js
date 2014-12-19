@@ -4,107 +4,66 @@ define([
   'backbone',
   'modernizr',
   'foundation',
-  'marionette',
-  'text!templates/en-us/hats-collection.jst',         // Adding IETF language tag
-  'text!templates/en-us/hats-collection-single.jst'
-], function($, _, Backbone, Modernizr, Foundation, Marionette, HatsViewTemp, HatsViewSingleTemp){
+  'marionette'
+], function($, _, Backbone, Modernizr, Foundation, Marionette){
   'use strict';
   console.log('Application was loaded');
 
+  // THE MAIN APPLICATION =====================================================================
+
+  // Set up a Marionette Application
   var App = new Backbone.Marionette.Application();
 
-  App.initialize = function() {
-    // Start Foundation
-    $(document).foundation();
-    // Set up a Marionette Application
+  // Start Foundation
+  $(document).foundation();
 
-    // Set up basic paths.
-    App.root = 'http://localhost:9090/api/';
+  // Set up a path to the API.
+  App.root = 'http://localhost:9090/api/';
 
-    // THE APP. STUFF THAT WILL EVENTUALLY BE BROKEN OUT TO MODULES =============================
-    App.addRegions({
-      primaryViewport: '#applicationHost'
-    });
+  App.addRegions({
+    primaryViewport: '#applicationHost'
+  });
 
-    App.Router = Marionette.AppRouter.extend({
-      appRoutes: {
-        '': 'hatCollection',        // http://localhost:9000/#
-        'hats': 'hatCollection',    // http://localhost:9000/#/hats
-        'hats/:id': 'hatCollection' // http://localhost:9000/#/hats Not yet implemented.
-      }
-    });
+  App.Router = Marionette.AppRouter.extend({
+    appRoutes: {
+      '': 'hatCollection',        // http://localhost:9000/#
+      'hats': 'hatCollection',    // http://localhost:9000/#/hats
+      'hats/:id': 'hatCollection' // http://localhost:9000/#/hats Not yet implemented.
+    }
+  });
 
-    App.Controller = Marionette.Controller.extend({
-      hatCollection: function() {
-        indexHats.fetch().success(function(){ 
-          App.primaryViewport.show(hatCollectionView);
+  App.Controller = Marionette.Controller.extend({
+    hatCollection: function() {
+      App.CustomModules.Hats();
+    }
+  });
+
+  // TODO: Add a state model?
+
+  App.CustomModules = {
+
+    Hats: function() {
+      require(['modules/hats/hats'], function (hatsMod) {
+        console.log('Starting the HATS module...');
+        hatsMod.indexHats.fetch().success(function(){ 
+          App.primaryViewport.show(hatsMod.hatCollectionView);
         });
-      }
-    });
-
-    // TODO: Add a state model?
-
-    var hatModel = Backbone.Model.extend();
-
-    var HatCollection = Backbone.Collection.extend({
-      url: App.root + 'hats',
-      model: hatModel,
-      parse: function(response){  // Our models are not sored directly on the root response, 
-        return response.hats;     // but inside a hats object.
-      }
-    });
-
-    var indexHats = new HatCollection();
-
-    // VIEWS (ALSO TO BE BROKEN OUT) ============================================================
-
-    // As long as we're dropping the item view for now...
-    // var HatView = Backbone.Marionette.ItemView.extend();
-
-    var HatCompositeView = Backbone.Marionette.CompositeView.extend({
-      className: 'panel clearfix hat',
-      childViewContainer: '#collectionOutput',
-      template: _.template(HatsViewSingleTemp)
-
-      // Doesn't seem that this bit is needed:
-      // ItemView: HatView
-
-      // May want to add this once we start updating the collection:
-      // modelEvents: {
-      //   'change': 'render'
-      // },
-    });
-
-    var hatCollectionView = new HatCompositeView({
-      id: 'primaryPanel',           // If we don't add an ID and class here it will
-      className: 'hatCollection',   // get the ones from the constructor.
-      collection: indexHats,
-      template: _.template(HatsViewTemp)
-    });
-
-    // LETS BUILD A MODULE ======================================================================
-
-    App.CustomModules = function() {
-      console.log('Running Modules');
-      require(['modules/hats/hats'], function (HatsMod) {
-      });      
-    };
-
-    App.CustomModules();
-
-    // SET UP START LISTNER =====================================================================
-    App.on('start', function() {
-      App.hatController = new App.Controller();
-      App.router = new App.Router({
-        controller: App.hatController
       });
-      Backbone.history.start();
-    });
-
-    // START THE APP ============================================================================
-    App.start();
+    }
 
   };
+
+  // SET UP START LISTNER =====================================================================
+  App.on('start', function() {
+    App.hatController = new App.Controller();
+    App.router = new App.Router({
+      controller: App.hatController
+    });
+    Backbone.history.start();
+  });
+
+  // START THE APP ============================================================================
+  App.start();
 
   return App;
 });

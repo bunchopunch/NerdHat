@@ -41,5 +41,5 @@ require.config({
 console.log('Main was fired');
 
 require(['application'], function (Application) {
-  Application.initialize();
+  Application;
 });
