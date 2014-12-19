@@ -26,32 +26,25 @@ define([
 
   App.Router = Marionette.AppRouter.extend({
     appRoutes: {
-      '': 'hatCollection',        // http://localhost:9000/#
+      '': 'hatCollection',        // http://localhost:9000/# - Not yet implemented.
       'hats': 'hatCollection',    // http://localhost:9000/#/hats
-      'hats/:id': 'hatCollection' // http://localhost:9000/#/hats Not yet implemented.
+      'hats/:id': 'hatCollection' // http://localhost:9000/#/hats/{ID} - Not yet implemented.
     }
   });
 
   App.Controller = Marionette.Controller.extend({
     hatCollection: function() {
-      App.CustomModules.Hats();
-    }
-  });
-
-  // TODO: Add a state model?
-
-  App.CustomModules = {
-
-    Hats: function() {
       require(['modules/hats/hats'], function (hatsMod) {
-        console.log('Starting the HATS module...');
+        // This fetch logic should move into the module
         hatsMod.indexHats.fetch().success(function(){ 
+          // We'll want to load a layout from the module instead
           App.primaryViewport.show(hatsMod.hatCollectionView);
         });
       });
     }
+  });
 
-  };
+  // TODO: Add a state model?
 
   // SET UP START LISTNER =====================================================================
   App.on('start', function() {

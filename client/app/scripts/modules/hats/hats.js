@@ -1,3 +1,5 @@
+/* globals _, Backbone */
+
 define([
   'application',
   'text!templates/en-us/hats-collection.jst',         // Adding IETF language tag
