@@ -11,17 +11,15 @@ define([
   'use strict';
   console.log('Application was loaded');
 
-  var initialize = function() {
+  var App = new Backbone.Marionette.Application();
+
+  App.initialize = function() {
     // Start Foundation
     $(document).foundation();
     // Set up a Marionette Application
-    var App = new Backbone.Marionette.Application();
 
     // Set up basic paths.
     App.root = 'http://localhost:9090/api/';
-
-    // We will eventually require templates here, but with a dynamic culture/language code.
-    // If we choose to go down that road.
 
     // THE APP. STUFF THAT WILL EVENTUALLY BE BROKEN OUT TO MODULES =============================
     App.addRegions({
@@ -39,7 +37,6 @@ define([
     App.Controller = Marionette.Controller.extend({
       hatCollection: function() {
         indexHats.fetch().success(function(){ 
-          console.log(indexHats);
           App.primaryViewport.show(hatCollectionView);
         });
       }
@@ -85,7 +82,17 @@ define([
       template: _.template(HatsViewTemp)
     });
 
-    // SET UP START LISTNER ======================================================================
+    // LETS BUILD A MODULE ======================================================================
+
+    App.CustomModules = function() {
+      console.log('Running Modules');
+      require(['modules/hats/hats'], function (HatsMod) {
+      });      
+    };
+
+    App.CustomModules();
+
+    // SET UP START LISTNER =====================================================================
     App.on('start', function() {
       App.hatController = new App.Controller();
       App.router = new App.Router({
@@ -94,12 +101,10 @@ define([
       Backbone.history.start();
     });
 
-    // START THE APP =============================================================================
+    // START THE APP ============================================================================
     App.start();
 
   };
 
-  return {
-    initialize: initialize
-  };
+  return App;
 });
