@@ -27,13 +27,20 @@ define([
   // It would be neat to abstract routes so they aren't hard coded.
   App.Router = Marionette.AppRouter.extend({
     appRoutes: {
-      '': 'hatCollection',        // http://localhost:9000/#            - Not yet implemented.
+      '': 'about',        // http://localhost:9000/#            - Not yet implemented.
       'hats': 'hatCollection',    // http://localhost:9000/#/hats       - Hats module
       'hats/:id': 'hatCollection' // http://localhost:9000/#/hats/{ID}  - Not yet implemented.
     }
   });
 
   App.Controller = Marionette.Controller.extend({
+
+    about: function() {
+      require(['modules/about/about'], function (aboutMod) {
+        App.primaryViewport.show(aboutMod.aboutView);
+      });
+    },
+
     hatCollection: function() {
       require(['modules/hats/hats'], function (hatsMod) {
         // This fetch logic should move into the module
@@ -43,6 +50,7 @@ define([
         });
       });
     }
+
   });
 
   // TODO: Add a screen/UI state model?
