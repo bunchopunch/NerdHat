@@ -34,24 +34,29 @@ define([
   });
 
   App.Controller = Marionette.Controller.extend({
-
     about: function() {
-      require(['modules/about/about'], function (aboutMod) {
-        App.primaryViewport.show(aboutMod.aboutView);
-      });
+      showAbout();
     },
-
     hatCollection: function() {
-      require(['modules/hats/hats'], function (hatsMod) {
-        // This fetch logic should move into the module
-        hatsMod.indexHats.fetch().success(function(){
-          // We'll want to load a layout from the module instead
-          App.primaryViewport.show(hatsMod.hatCollectionView);
-        });
-      });
+      showHatCollection();
     }
-
   });
+
+  var showAbout = function() {
+    require(['modules/about/about'], function (aboutMod) {
+      App.primaryViewport.show(aboutMod.aboutView);
+    });
+  };
+
+  var showHatCollection = function() {
+    require(['modules/hats/hats'], function (hatsMod) {
+      // This fetch logic should move into the module
+      hatsMod.indexHats.fetch().success(function(){
+        // We'll want to load a layout from the module instead
+        App.primaryViewport.show(hatsMod.hatCollectionView);
+      });
+    });
+  };
 
   // TODO: Add a screen/UI state model?
   // https://devblog.supportbee.com//2011/07/29/backbone-js-tips-lessons-from-the-trenches/
