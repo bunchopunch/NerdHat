@@ -35,26 +35,22 @@ define([
 
   App.Controller = Marionette.Controller.extend({
     about: function() {
-      showAbout();
+      showAboutModule();
     },
     hatCollection: function() {
       showHatCollection();
     }
   });
 
-  var showAbout = function() {
+  var showAboutModule = function() {
     require(['modules/about/about'], function (aboutMod) {
-      App.primaryViewport.show(aboutMod.aboutView);
+      App.primaryViewport.show( aboutMod.ShowModule() );
     });
   };
 
   var showHatCollection = function() {
     require(['modules/hats/hats'], function (hatsMod) {
-      // This fetch logic should move into the module
-      hatsMod.indexHats.fetch().success(function(){
-        // We'll want to load a layout from the module instead
-        App.primaryViewport.show(hatsMod.hatCollectionView);
-      });
+      App.primaryViewport.show( hatsMod.ShowModule() );
     });
   };
 
