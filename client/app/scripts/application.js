@@ -4,8 +4,9 @@ define([
   'backbone',
   'modernizr',
   'foundation',
-  'marionette'
-], function($, _, Backbone, Modernizr, Foundation, Marionette){
+  'marionette',
+  'text!templates/en-us/layout.jst',
+], function($, _, Backbone, Modernizr, Foundation, Marionette, LayoutTemp){
   'use strict';
   console.log('Application was loaded');
 
@@ -20,8 +21,22 @@ define([
   // Set up a path to the API.
   App.root = 'http://localhost:9090/api/';
 
-  App.addRegions({
-    primaryViewport: '#applicationHost'
+  console.log(Backbone.Marionette);
+
+  var HostLayout = Backbone.Marionette.LayoutView.extend({
+    template: _.template(LayoutTemp),
+    // define regions
+    el: '#applicationHost',
+    regions: {
+      navViewport: '#navHost',
+      primaryViewport: '#primaryHost'
+    }
+  });
+
+  App.hostLayout = new HostLayout();
+
+  require(['modules/nav/nav'], function (navMod) {
+    App.hostLayout.navViewport.show( navMod.ShowModule() );
   });
 
   // It would be neat to abstract routes so they aren't hard coded.
@@ -42,15 +57,16 @@ define([
     }
   });
 
+
   var showAboutModule = function() {
     require(['modules/about/about'], function (aboutMod) {
-      App.primaryViewport.show( aboutMod.ShowModule() );
+      App.hostLayout.primaryViewport.show( aboutMod.ShowModule() );
     });
   };
 
   var showHatCollection = function() {
     require(['modules/hats/hats'], function (hatsMod) {
-      App.primaryViewport.show( hatsMod.ShowModule() );
+      App.hostLayout.primaryViewport.show( hatsMod.ShowModule() );
     });
   };
 
