@@ -18,6 +18,24 @@ define([
         return new AboutMod.AboutView();
       };
 
+      AboutMod.Router = Backbone.Marionette.AppRouter.extend({
+        appRoutes: {
+          '': 'showAbout'
+        }
+      });
+
+      AboutMod.API = {
+        showAbout: function(){
+          App.hostLayout.primaryViewport.show( AboutMod.ShowModule() );
+        }
+      };
+
+      App.addInitializer(function(){
+        new AboutMod.Router({
+          controller: AboutMod.API
+        });
+      });
+
     });
   });
 

@@ -40,6 +40,24 @@ define([
         return HatsMod.hatCollectionView;
       };
 
+      HatsMod.Router = Backbone.Marionette.AppRouter.extend({
+        appRoutes: {
+          'hats': 'showHats'
+        }
+      });
+
+      HatsMod.API = {
+        showHats: function(){
+          App.hostLayout.primaryViewport.show( HatsMod.ShowModule() );
+        }
+      };
+
+      App.addInitializer(function(){
+        new HatsMod.Router({
+          controller: HatsMod.API
+        });
+      });
+
     });
   });
 
