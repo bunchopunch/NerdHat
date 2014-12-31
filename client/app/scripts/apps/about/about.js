@@ -2,8 +2,7 @@
 
 define([
   'application',
-  'text!apps/about/about.jst'         // Adding IETF language tag
-], function(App, AboutTemp) {
+], function(App) {
   'use strict';
 
   var AboutApp = App.module('AboutApp', function(AboutApp) {
@@ -12,16 +11,10 @@ define([
 
       var AboutAPI = {
         showAbout: function(){
-          App.hostLayout.primaryViewport.show( AboutApp.ShowModule() );
+          require(['apps/about/show/controller'], function(ShowController){
+            ShowController.showAbout();
+          });
         }
-      };
-
-      var AboutView = Backbone.Marionette.ItemView.extend({
-        template: _.template(AboutTemp)
-      });
-
-      AboutApp.ShowModule = function() {
-        return new AboutView();
       };
 
       AboutApp.Router = Backbone.Marionette.AppRouter.extend({

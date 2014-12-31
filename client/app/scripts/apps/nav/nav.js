@@ -10,12 +10,12 @@ define([
     NavApp.addInitializer(function() {
       console.log('NavApp has been initialized.');
 
-      var AboutView = Backbone.Marionette.ItemView.extend({
+      var NavView = Backbone.Marionette.ItemView.extend({
         template: _.template(NavTemp)
       });
 
       NavApp.ShowModule = function() {
-        return new AboutView();
+        return new NavView();
       };
 
     });
