@@ -7,7 +7,6 @@ define([
 
   var AboutApp = App.module('AboutApp', function(AboutApp) {
     AboutApp.addInitializer(function() {
-      console.log('AboutApp has been initialized.');
 
       var AboutAPI = {
         showAbout: function(){
@@ -24,6 +23,7 @@ define([
       });
 
       App.addInitializer(function(){
+        console.log('AboutApp router has been initialized.');
         new AboutApp.Router({
           controller: AboutAPI
         });

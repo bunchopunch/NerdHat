@@ -10,7 +10,7 @@ define([
       showAbout: function(){
         console.log('About App is now running: Show About');
         require(['apps/about/show/view'], function(View){
-          App.hostLayout.primaryViewport.show( new View.ShowModule() );
+          App.hostLayout.primaryViewport.show( View.ShowModule() );
         });
       }
     };
