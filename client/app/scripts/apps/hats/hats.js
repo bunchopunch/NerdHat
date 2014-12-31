@@ -2,8 +2,8 @@
 
 define([
   'application',
-  'text!templates/en-us/hats-collection.jst',         // Adding IETF language tag
-  'text!templates/en-us/hats-collection-single.jst'
+  'text!apps/hats/hats-collection.jst',         // Adding IETF language tag
+  'text!apps/hats/hats-collection-single.jst'
 ], function(App, HatsCollectionTemp, HatsItemTemp) {
   'use strict';
 

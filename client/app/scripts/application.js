@@ -5,7 +5,7 @@ define([
   'modernizr',
   'foundation',
   'marionette',
-  'text!templates/en-us/layout.jst',
+  'text!templates/layout.jst',
 ], function($, _, Backbone, Modernizr, Foundation, Marionette, LayoutTemp){
   'use strict';
   console.log('Application was loaded');
@@ -22,7 +22,7 @@ define([
   App.root = 'http://localhost:9090/api/';
 
   var HostLayout = Backbone.Marionette.LayoutView.extend({
-    template: _.template(LayoutTemp),
+    template: _.template(LayoutTemp), // Probably isn't needed
     el: '#applicationHost',
     regions: {
       navViewport: '#navHost',
