@@ -7,13 +7,19 @@ define([
 ], function(App, HatsCollectionTemp, HatsItemTemp) {
   'use strict';
 
-  var HatsMod = App.module('HatsMod', function(HatsMod) {
-    HatsMod.addInitializer(function() {
-      console.log('Module: HatsMod has been initialized.');
+  var HatsApp = App.module('HatsApp', function(HatsApp) {
+    HatsApp.addInitializer(function() {
+      console.log('HatsApp has been initialized.');
+
+      var HatsAPI = {
+        showHats: function(){
+          App.hostLayout.primaryViewport.show( HatsApp.ShowModule() );
+        }
+      };
 
       var hatModel = Backbone.Model.extend();
 
-      HatsMod.HatCollection = Backbone.Collection.extend({
+      HatsApp.HatCollection = Backbone.Collection.extend({
         url: App.root + 'hats',
         model: hatModel,
         parse: function(response){  // Our models are not sored directly on the root response, 
@@ -21,45 +27,39 @@ define([
         }
       });
 
-      HatsMod.indexHats = new HatsMod.HatCollection();
+      HatsApp.indexHats = new HatsApp.HatCollection();
 
-      HatsMod.HatCompositeView = Backbone.Marionette.CompositeView.extend({
+      HatsApp.HatCompositeView = Backbone.Marionette.CompositeView.extend({
         className: 'panel clearfix hat',
         childViewContainer: '#collectionOutput',
         template: _.template(HatsItemTemp)
       });
 
-      HatsMod.ShowModule = function() {
-        HatsMod.indexHats.fetch().success();
-        HatsMod.hatCollectionView = new HatsMod.HatCompositeView({
+      HatsApp.ShowModule = function() {
+        HatsApp.indexHats.fetch().success();
+        HatsApp.hatCollectionView = new HatsApp.HatCompositeView({
           id: 'primaryPanel',           // If we don't add an ID and class here it will
           className: 'hatCollection',   // get the ones from the constructor.
-          collection: HatsMod.indexHats,
+          collection: HatsApp.indexHats,
           template: _.template(HatsCollectionTemp)
         });
-        return HatsMod.hatCollectionView;
+        return HatsApp.hatCollectionView;
       };
 
-      HatsMod.Router = Backbone.Marionette.AppRouter.extend({
+      HatsApp.Router = Backbone.Marionette.AppRouter.extend({
         appRoutes: {
           'hats': 'showHats'
         }
       });
 
-      HatsMod.API = {
-        showHats: function(){
-          App.hostLayout.primaryViewport.show( HatsMod.ShowModule() );
-        }
-      };
-
       App.addInitializer(function(){
-        new HatsMod.Router({
-          controller: HatsMod.API
+        new HatsApp.Router({
+          controller: HatsAPI
         });
       });
 
     });
   });
 
-  return HatsMod;
+  return HatsApp;
 });

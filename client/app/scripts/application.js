@@ -32,7 +32,7 @@ define([
 
   App.hostLayout = new HostLayout();
 
-  require(['modules/nav/nav'], function (navMod) {
+  require(['apps/nav/nav'], function (navMod) {
     App.hostLayout.navViewport.show( navMod.ShowModule() );
   });
 
@@ -47,7 +47,7 @@ define([
   // SET UP START LISTNER =====================================================================
   App.on('start', function() {
     if(Backbone.history){
-      require(['modules/about/about', 'modules/hats/hats'], function () {
+      require(['apps/about/about', 'apps/hats/hats'], function () {
         Backbone.history.start();
       });
     }
