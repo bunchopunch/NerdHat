@@ -9,17 +9,23 @@ define([
     HatsApp.addInitializer(function() {
 
       var HatsAPI = {
-        showHats: function(){
+        listHats: function(){
           require(['apps/hats/list/controller'], function(ListController){
             ListController.listHats();
           });
-          // App.hostLayout.primaryViewport.show( HatsApp.ShowModule() );
+        },
+        showHats: function(hatId){
+          console.log('show hat: ' + hatId);
+          require(['apps/hats/show/controller'], function(ShowController){
+            ShowController.showHats(hatId);
+          });
         }
       };
 
       HatsApp.Router = Backbone.Marionette.AppRouter.extend({
         appRoutes: {
-          'hats': 'showHats'
+          'hats/:hatId': 'showHats',
+          'hats': 'listHats'
         }
       });
 

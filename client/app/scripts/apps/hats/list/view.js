@@ -7,7 +7,7 @@ define([
 ], function(App, HatsCollectionTemp, HatsItemTemp) {
   'use strict';
 
-  App.module('HatsApp.Show.View', function(View) {
+  App.module('HatsApp.List.View', function(View) {
     View.ListView = Backbone.Marionette.ItemView.extend({
       template: _.template(HatsCollectionTemp)
     });
@@ -44,5 +44,5 @@ define([
 
   });
 
-  return App.HatsApp.Show.View;
+  return App.HatsApp.List.View;
 });
