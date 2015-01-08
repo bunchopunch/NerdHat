@@ -5,8 +5,9 @@ define([
   'modernizr',
   'foundation',
   'marionette',
+  'localStorage',
   'text!templates/layout.jst',
-], function($, _, Backbone, Modernizr, Foundation, Marionette, LayoutTemp){
+], function($, _, Backbone, Modernizr, Foundation, Marionette, localStorage, LayoutTemp){
   'use strict';
   console.log('Application was loaded');
 

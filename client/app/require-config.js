@@ -10,6 +10,7 @@ require.config({
     'backbone': '../../bower_components/backbone/backbone',
     'underscore': '../../bower_components/underscore/underscore',
     'marionette': '../../bower_components/marionette/lib/backbone.marionette',
+    'localStorage': '../../bower_components/Backbone.localStorage/Backbone.localStorage',
     'foundation': '../../bower_components/foundation/js/foundation',
     'text': '../../bower_components/text/text',
     'vendor': '../../vendor_components'
@@ -29,6 +30,10 @@ require.config({
     marionette: {
       deps: ['backbone'],
       exports: 'Backbone.Marionette'
+    },
+    localStorage: {
+      deps: ['backbone'],
+      exports: 'Backbone.localStorage'
     },
     foundation: {
       deps: [

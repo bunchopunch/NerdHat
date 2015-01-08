@@ -16,6 +16,10 @@ require.config({
       deps: ['backbone'],
       exports: 'Backbone.Marionette'
     },
+    localStorage: {
+      deps: ['backbone'],
+      exports: 'Backbone.localStorage'
+    },
     foundation: {
       deps: [
         'jquery',
@@ -33,6 +37,7 @@ require.config({
     foundation: '../bower_components/foundation/js/foundation',
     backbone: '../bower_components/backbone/backbone',
     marionette: '../bower_components/marionette/lib/backbone.marionette',
+    localStorage: '../bower_components/Backbone.localStorage/Backbone.localStorage',
     underscore: '../bower_components/underscore/underscore',
     text: '../bower_components/text/text'
   }
