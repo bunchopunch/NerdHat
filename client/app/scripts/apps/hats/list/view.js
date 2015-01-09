@@ -12,6 +12,8 @@ define([
       template: _.template(HatsCollectionTemp)
     });
 
+      console.log(HatsApp);
+
       var hatModel = Backbone.Model.extend();
 
       View.HatCollection = Backbone.Collection.extend({

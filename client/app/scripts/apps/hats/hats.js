@@ -36,6 +36,8 @@ define([
         });
       });
 
+      HatsApp.newHatsModel = Backbone.Model.extend();
+
     });
   });
 
