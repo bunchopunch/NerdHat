@@ -1,8 +1,9 @@
 /* globals _, Backbone */
 
 define([
-  'application'
-], function(App) {
+  'application',
+  'apps/hats/collections/HatsAppCollection'
+], function(App, HatsAppCollection) {
   'use strict';
 
   var HatsApp = App.module('HatsApp', function(HatsApp) {
@@ -28,6 +29,9 @@ define([
           'hats': 'listHats'
         }
       });
+
+      HatsApp.hatsList = new HatsAppCollection();
+      console.log(HatsApp.hatsList);
 
       App.addInitializer(function(){
         console.log('HatsApp router has been initialized.');
