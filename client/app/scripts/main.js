@@ -12,6 +12,10 @@ require.config({
     marionette: {
         exports: 'Backbone.Marionette',
         deps: ['backbone']
+    },
+    'radio.shim': {
+        exports: 'radio.shim',
+        deps: ['backbone', 'underscore', 'backbone.radio']
     }
   },
   deps: ['jquery', 'underscore'],
@@ -24,7 +28,7 @@ require.config({
     backbone: '../bower_components/backbone/backbone',
     'backbone.babysitter': '../bower_components/backbone.babysitter/lib/backbone.babysitter',
 //    'backbone.wreqr': '../bower_components/backbone.wreqr/lib/backbone.wreqr',
-    'backbone.radio': '../bower_components/backbone.radio/src/backbone.radio',
+    'backbone.radio': '../bower_components/backbone.radio/build/backbone.radio',
 //    'backbone.localStorage': '../bower_components/Backbone.localStorage/Backbone.localStorage',
     'radio.shim': 'shims/radio.shim',
     marionette: '../bower_components/marionette/lib/core/backbone.marionette',
