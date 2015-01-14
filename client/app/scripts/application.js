@@ -5,8 +5,10 @@ define([
   'modernizr',
   'foundation',
   'marionette',
+//  'localStorage',
   'text!templates/layout.jst',
-], function($, _, Backbone, Modernizr, Foundation, Marionette, LayoutTemp){
+  'radio.shim',
+], function($, _, Backbone, Modernizr, Foundation, Marionette, LayoutTemp, Radio){
   'use strict';
   console.log('Application was loaded');
 

@@ -2,15 +2,17 @@
   "name": "webapp-scaffold",
   "private": true,
   "dependencies": {
-    "jquery": "~2.1.1",
-    "modernizr": ">= 2.6.2",
-    "underscore": "~1.4.3",
-    "backbone": "~1.0.0",
-    "requirejs": "~2.1.5",
-    "requirejs-text": "~2.0.5",
+    "jquery": "2.1.1",
+    "modernizr": "2.6.2",
+    "underscore": "1.4.3",
+    "backbone": "1.0.0",
+    "requirejs": "2.1.5",
+    "requirejs-text": "2.0.5",
     "text": "2.0.12",
-    "foundation": "zurb/bower-foundation",
-    "almond": "~0.3.0",
-    "marionette": "~2.2.2"
+    "foundation": "5.5.0",
+    "almond": "0.3.0",
+    "marionette": "2.2.2",
+    "Backbone.localStorage": "1.1.15",
+    "backbone.radio": "~0.8.4"
   }
 }
