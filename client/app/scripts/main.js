@@ -3,43 +3,36 @@ require.config({
 
   shim: {
     underscore: {
-      exports: '_'
+        exports: '_'
     },
     backbone: {
-      deps: [
-        'underscore',
-        'jquery'
-      ],
-      exports: 'Backbone'
+        exports: 'Backbone',
+        deps: ['jquery', 'underscore']
     },
     marionette: {
-      deps: ['backbone'],
-      exports: 'Backbone.Marionette'
-    },
-    localStorage: {
-      deps: ['backbone'],
-      exports: 'Backbone.localStorage'
-    },
-    foundation: {
-      deps: [
-        'jquery',
-        'modernizr'
-      ],
-      exports: 'Foundation'
-    },
-    modernizr: {
-      exports: 'Modernizr'
-    },
+        exports: 'Backbone.Marionette',
+        deps: ['backbone']
+    }
   },
+  deps: ['jquery', 'underscore'],
   paths: {
     jquery: '../bower_components/jquery/dist/jquery',
     modernizr: '../bower_components/modernizr/modernizr',
     foundation: '../bower_components/foundation/js/foundation',
-    backbone: '../bower_components/backbone/backbone',
-    marionette: '../bower_components/marionette/lib/backbone.marionette',
-    localStorage: '../bower_components/Backbone.localStorage/Backbone.localStorage',
     underscore: '../bower_components/underscore/underscore',
-    text: '../bower_components/text/text'
+    text: '../bower_components/text/text',
+    backbone: '../bower_components/backbone/backbone',
+    'backbone.babysitter': '../bower_components/backbone.babysitter/lib/backbone.babysitter',
+//    'backbone.wreqr': '../bower_components/backbone.wreqr/lib/backbone.wreqr',
+    'backbone.radio': '../bower_components/backbone.radio/src/backbone.radio',
+//    'backbone.localStorage': '../bower_components/Backbone.localStorage/Backbone.localStorage',
+    'radio.shim': 'shims/radio.shim',
+    marionette: '../bower_components/marionette/lib/core/backbone.marionette',
+  },
+  map: {
+      '*': {
+          'backbone.wreqr': 'backbone.radio'
+      }
   }
 });
 

@@ -9,7 +9,7 @@ define([
   var HatsAppCollection = Backbone.Collection.extend({
     url: App.root + 'hats',
     model: HatsAppModel,
-    localStorage: new Backbone.LocalStorage('localHatsAppCollection'),
+//    localStorage: new Backbone.LocalStorage('localHatsAppCollection'),
     parse: function(response){  // Our models are not sored directly on the root response, 
       return response.hats;     // but inside a hats object.
     },

@@ -12,6 +12,7 @@
     "foundation": "5.5.0",
     "almond": "0.3.0",
     "marionette": "2.2.2",
-    "Backbone.localStorage": "1.1.15"
+    "Backbone.localStorage": "1.1.15",
+    "backbone.radio": "~0.8.4"
   }
 }
