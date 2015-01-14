@@ -159,13 +159,14 @@ module.exports = function (grunt) {
         options: {
           logLevel: 2,
           almond: true,
+          findNestedDependencies: true,
           name: '../../bower_components/almond/almond',
           baseUrl: '<%= config.appLocation %>/scripts',
           optimize: 'uglify',
           include: ['main'],
           out: "<%= config.distLocation %>/scripts/main.js",
           wrap: true,
-          mainConfigFile: '<%= config.appLocation %>/require-config.js'
+          mainConfigFile: '<%= config.appLocation %>/scripts/main.js'
         }
       }
     },
